@@ -1,0 +1,3 @@
+# ClassicalSpinMFGS
+
+Classical spin MFGS
