@@ -5,10 +5,10 @@
 ### Spin Components ###
 sx(θ, ϕ) = sin(θ)*cos(ϕ)
 sy(θ, ϕ) = sin(θ)*sin(ϕ)
-sz(θ) = cos(ϕ)
+sz(θ) = cos(θ)
 
 ### Spin Couplings ###
-θ1, ϕ1 = [π/2 0] # Direction 1
+θ1, ϕ1 = [7π/16 0] # Direction 1
 θ2, ϕ2 = [π/2 π/2] # Direciton 2
 θ3, ϕ3 = [0 0] # Direction 3
 

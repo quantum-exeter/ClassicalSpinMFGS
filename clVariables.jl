@@ -15,10 +15,11 @@ prmd = [1.4 0 10000]
 prme = [2 0.001 10]
 prmf = [2 0.001 1]
 prmg = [2 0.001 50]
+prm5 = [7 5 100]
 
-prm1 = prme; # Change the RHS here to change parameter set for coupling direction 1
-prm2 = prme; # Change the RHS here to change parameter set for coupling direction 2
-prm3 = prme; # Change the RHS here to change parameter set for coupling direction 3
+prm1 = prm5; # Change the RHS here to change parameter set for coupling direction 1
+prm2 = prm5; # Change the RHS here to change parameter set for coupling direction 2
+prm3 = prm5; # Change the RHS here to change parameter set for coupling direction 3
 
 ω01, Γ1, α1 = prm1*ωL
 ω02, Γ2, α2 = prm2*ωL
