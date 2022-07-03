@@ -10,10 +10,9 @@ module MFGS
 
     export LorPrm, CouplingAngles, ωL, mag1D, mag2D, mag3D
 
-    include("types.jl")
-    include("clVariables.jl")
+    include("variables.jl")
     include("spinComponents.jl")
-    include("clHamiltonians.jl")
+    include("hamiltonians.jl")
     include("integration.jl")
     include("partitionFunctions.jl")
     include("magnetisation.jl")
