@@ -2,27 +2,10 @@
 #### clHamiltonians.jl ####
 ###########################
 
-include("clVariables.jl")
-include("spinComponents.jl")
-
-### Reorganisation Energies ###
-Q1 = (α1*ωL)/(2*ω01^2)
-Q2 = (α2*ωL)/(2*ω02^2)
-Q3 = (α3*ωL)/(2*ω03^2)
+### Reorganisation Energy ###
+Q(prm::LorPrm) = (prm.α*ωL)/(2*prm.ω0^2)
 
 # Effective Hamiltonians ##
-Heff1D(θ, ϕ) = -sign(γ)*sz(θ) - Q1*s1(θ, ϕ)^2
-Heff2D(θ, ϕ) = -sign(γ)*sz(θ) - Q1*s1(θ, ϕ)^2 - Q2*s2(θ, ϕ)^2
-Heff3D(θ, ϕ) = -sign(γ)*sz(θ) - Q1*s1(θ, ϕ)^2 - Q2*s2(θ, ϕ)^2 - Q3*s3(θ, ϕ)^2
-
-function Heff(dim, θ, ϕ)
-    if dim == 1
-        return Heff1D(θ, ϕ)
-    elseif dim == 2
-        return Heff2D(θ, ϕ)
-    elseif dim == 3 
-        return Heff3D(θ, ϕ)
-    else
-        print("Please return a dimension of either 1, 2 or 3.")
-    end
-end
+Heff1D(θ, ϕ, ang1::CouplingAngles, prm1::LorPrm) = -sign(γ)*sz(θ) - Q(prm1)*sc(θ, ϕ, ang1)^2
+Heff2D(θ, ϕ, ang1::CouplingAngles, ang2::CouplingAngles, prm1::LorPrm, prm2::LorPrm) = -sign(γ)*sz(θ) - Q(prm1)*sc(θ, ϕ, ang1)^2 - Q(prm2)*sc(θ, ϕ, ang2)^2
+Heff3D(θ, ϕ, ang1::CouplingAngles, ang2::CouplingAngles, ang3::CouplingAngles, prm1::LorPrm, prm2::LorPrm, prm3::LorPrm) = -sign(γ)*sz(θ) - Q(prm1)*sc(θ, ϕ, ang1)^2 - Q(prm2)*sc(θ, ϕ, ang2)^2 - Q(prm3)*sc(θ, ϕ, ang3)^2

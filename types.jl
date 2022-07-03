@@ -3,11 +3,12 @@
 ##################
 
 struct LorPrm
-    ω0::Float64
-    Γ::Float64
-    α::Float64 
+    ω0
+    Γ
+    α
 end
 
-a = LorPrm(6,6,6)
-
-a.w
+struct CouplingAngles
+    θ
+    ϕ
+end
