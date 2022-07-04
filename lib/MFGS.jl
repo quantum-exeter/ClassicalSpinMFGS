@@ -8,7 +8,7 @@ module MFGS
     using Kronecker
     using QuadGK
 
-    export LorPrm, CouplingAngles, ωL, mag1D, mag2D, mag3D
+    export LorPrm1D, LorPrm2D, LorPrm3D, CouplAng1D, CouplAng2D, CouplAng3D, mag
 
     include("variables.jl")
     include("spinComponents.jl")

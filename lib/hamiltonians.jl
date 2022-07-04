@@ -1,11 +1,47 @@
-###########################
-#### clHamiltonians.jl ####
-###########################
+#########################
+#### hamiltonians.jl ####
+#########################
 
-### Reorganisation Energy ###
-Q(prm::LorPrm) = (prm.α)/(2*prm.ω0^2)
+### Types ###
+abstract type Lorentzian end
 
-# Effective Hamiltonians ##
-Heff(θ, ϕ, ang1::CouplingAngles, prm1::LorPrm) = -sign(γ)*sz(θ) - Q(prm1)*sc(θ, ϕ, ang1)^2
-Heff(θ, ϕ, ang1::CouplingAngles, prm1::LorPrm, ang2::CouplingAngles, prm2::LorPrm) = -sign(γ)*sz(θ) - Q(prm1)*sc(θ, ϕ, ang1)^2 - Q(prm2)*sc(θ, ϕ, ang2)^2
-Heff(θ, ϕ, ang1::CouplingAngles, prm1::LorPrm, ang2::CouplingAngles, prm2::LorPrm, ang3::CouplingAngles, prm3::LorPrm) = -sign(γ)*sz(θ) - Q(prm1)*sc(θ, ϕ, ang1)^2 - Q(prm2)*sc(θ, ϕ, ang2)^2 - Q(prm3)*sc(θ, ϕ, ang3)^2
+struct LorPrm1D{T<:Real} <: Lorentzian
+    ω01::T
+    Γ1::T
+    α1::T
+end
+
+struct LorPrm2D{T<:Real} <: Lorentzian
+    ω01::T
+    Γ1::T
+    α1::T
+    ω02::T
+    Γ2::T
+    α2::T
+end
+
+struct LorPrm3D{T<:Real} <: Lorentzian
+    ω01::T
+    Γ1::T
+    α1::T
+    ω02::T
+    Γ2::T
+    α2::T
+    ω03::T
+    Γ3::T
+    α3::T
+end
+
+### Reorganisation Energies ###
+Q(prm::LorPrm1D) = Diagonal([(prm.α1)/(2*prm.ω01^2),
+                             0,
+                             0])
+Q(prm::LorPrm2D) = Diagonal([(prm.α1)/(2*prm.ω01^2),
+                             (prm.α2)/(2*prm.ω02^2),
+                             0])
+Q(prm::LorPrm3D) = Diagonal([(prm.α1)/(2*prm.ω01^2),
+                             (prm.α2)/(2*prm.ω02^2),
+                             (prm.α3)/(2*prm.ω03^2)])
+
+### Effective Hamiltonian ###
+Heff(θ, ϕ, ang::CouplingAngles, prm::Lorentzian) = -sign(γ)*sz(θ) - transpose(scvect(θ, ϕ, ang))*Q(prm)*scvect(θ, ϕ, ang)
