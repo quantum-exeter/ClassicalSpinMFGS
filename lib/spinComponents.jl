@@ -32,12 +32,12 @@ sy(θ, ϕ) = sin(θ)*sin(ϕ)
 sz(θ) = cos(θ)
 
 ### Spin Couplings ###
-scvect(θ, ϕ, ang::CouplAng1D) = [sx(θ, ϕ)*sin(ang.θ1)*cos(ang.ϕ1) + sy(θ, ϕ)*sin(ang.θ1)*cos(ang.ϕ1) + sz(θ)*cos(ang.θ1),
+scvect(θ, ϕ, ang::CouplAng1D) = [sx(θ, ϕ)*sin(ang.θ1)*cos(ang.ϕ1) + sy(θ, ϕ)*sin(ang.θ1)*sin(ang.ϕ1) + sz(θ)*cos(ang.θ1),
                                  0,
                                  0]
-scvect(θ, ϕ, ang::CouplAng2D) = [sx(θ, ϕ)*sin(ang.θ1)*cos(ang.ϕ1) + sy(θ, ϕ)*sin(ang.θ1)*cos(ang.ϕ1) + sz(θ)*cos(ang.θ1),
-                                 sx(θ, ϕ)*sin(ang.θ2)*cos(ang.ϕ2) + sy(θ, ϕ)*sin(ang.θ2)*cos(ang.ϕ2) + sz(θ)*cos(ang.θ2),
+scvect(θ, ϕ, ang::CouplAng2D) = [sx(θ, ϕ)*sin(ang.θ1)*cos(ang.ϕ1) + sy(θ, ϕ)*sin(ang.θ1)*sin(ang.ϕ1) + sz(θ)*cos(ang.θ1),
+                                 sx(θ, ϕ)*sin(ang.θ2)*cos(ang.ϕ2) + sy(θ, ϕ)*sin(ang.θ2)*sin(ang.ϕ2) + sz(θ)*cos(ang.θ2),
                                  0]
-scvect(θ, ϕ, ang::CouplAng3D) = [sx(θ, ϕ)*sin(ang.θ1)*cos(ang.ϕ1) + sy(θ, ϕ)*sin(ang.θ1)*cos(ang.ϕ1) + sz(θ)*cos(ang.θ1),
-                                 sx(θ, ϕ)*sin(ang.θ2)*cos(ang.ϕ2) + sy(θ, ϕ)*sin(ang.θ2)*cos(ang.ϕ2) + sz(θ)*cos(ang.θ2),
-                                 sx(θ, ϕ)*sin(ang.θ3)*cos(ang.ϕ3) + sy(θ, ϕ)*sin(ang.θ3)*cos(ang.ϕ3) + sz(θ)*cos(ang.θ3)]
+scvect(θ, ϕ, ang::CouplAng3D) = [sx(θ, ϕ)*sin(ang.θ1)*cos(ang.ϕ1) + sy(θ, ϕ)*sin(ang.θ1)*sin(ang.ϕ1) + sz(θ)*cos(ang.θ1),
+                                 sx(θ, ϕ)*sin(ang.θ2)*cos(ang.ϕ2) + sy(θ, ϕ)*sin(ang.θ2)*sin(ang.ϕ2) + sz(θ)*cos(ang.θ2),
+                                 sx(θ, ϕ)*sin(ang.θ3)*cos(ang.ϕ3) + sy(θ, ϕ)*sin(ang.θ3)*sin(ang.ϕ3) + sz(θ)*cos(ang.θ3)]
