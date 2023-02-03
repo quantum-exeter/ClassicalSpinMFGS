@@ -43,5 +43,8 @@ Q(prm::LorPrm3D) = Diagonal([(prm.α1)/(2*prm.ω01^2),
                              (prm.α2)/(2*prm.ω02^2),
                              (prm.α3)/(2*prm.ω03^2)])
 
+ ### System Hamiltonian ###
+HS(θ) = -sign(γ)*sz(θ)
+
 ### Effective Hamiltonian ###
 Heff(θ, ϕ, ang::CouplingAngles, prm::Lorentzian) = -sign(γ)*sz(θ) - transpose(scvect(θ, ϕ, ang))*Q(prm)*scvect(θ, ϕ, ang)
