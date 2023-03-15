@@ -1,5 +1,7 @@
+using MKL
 using CSV
 using DataFrames
+using ProgressMeter
 
 include("../lib/MFGS.jl")
 using .MFGS
@@ -19,25 +21,40 @@ using .MFGS
 prm = LorPrm1D(2., 0.6, 10.) 
 # prm = LorPrm2D(2., 0.001, 10., 2., 0.001, 10.) 
 # prm = LorPrm3D(2., 0.6, 10., 2., 0.6, 10., 2., 0.6, 10.) # Lorentzian parameters
-ang =  CouplAng1D(π/4, 0.0) # Coupling angles
+ang =  CouplAng1D(atan(sqrt(2)), π/4) # Coupling angles
 # ang =  CouplAng2D(π/2, 0.0, π/2, π/2) # Coupling angles
 # ang =  CouplAng3D(π/2, 0.0, π/2, π/2, 0.0, 0.0) # Coupling angles
 
 ### Temperature Range ###
-T = exp10.(range(-2, 3, length=100));
+T = exp10.(range(-3, 2, length=200));
 
 ### Gibbs Magnetisations ###
-magGx_list = [magGx(i) for i in T]
-magGy_list = [magGy(i) for i in T]
-magGz_list = [magGz(i) for i in T]
+
+sxGS_list = zeros(length(T))
+syGS_list = zeros(length(T))
+szGS_list = zeros(length(T))
+
+@showprogress for i in eachindex(T)
+    sxGS_list[i] = magGx(big(T[i]))
+    syGS_list[i] = magGy(big(T[i]))
+    szGS_list[i] = magGz(big(T[i]))
+end
 
 ### MFGS Magnetisations ###
-magx_list = [magx(i, ang, prm) for i in T]
-magy_list = [magy(i, ang, prm) for i in T]
-magz_list = [magz(i, ang, prm) for i in T]
+
+sxMFGS_list = zeros(length(T))
+syMFGS_list = zeros(length(T))
+szMFGS_list = zeros(length(T))
+
+@showprogress for i in eachindex(T)
+    sxMFGS_list[i] = magx(big(T[i]), ang, prm)
+    syMFGS_list[i] = magy(big(T[i]), ang, prm)
+    szMFGS_list[i] = magz(big(T[i]), ang, prm)
+end
 
 ### Store Values ###
-dfGibbs = DataFrame(hcat(T, magGx_list, magGy_list, magGz_list), :auto)
-df = DataFrame(hcat(T, magx_list, magy_list, magz_list), :auto)
+dfGibbs = DataFrame(hcat(T, sxGS_list, syGS_list, szGS_list), :auto)
+df = DataFrame(hcat(T, sxMFGS_list, syMFGS_list, szMFGS_list), :auto)
 
-CSV.write("/Users/charliehogg/Work/ClassicalSpinMFGS/paper_data/cl_Gibbs.csv",  dfGibbs, header = ["T", "sx", "sy", "sz"])
+CSV.write("./paper_data/cl_Gibbs.csv",  dfGibbs, header = ["T", "sxGS", "syGS", "szGS"])
+CSV.write("./paper_data/cl_MFGS_1D_prmd.csv",  df, header = ["T", "sxMFGS", "syMFGS", "szMFGS"])
