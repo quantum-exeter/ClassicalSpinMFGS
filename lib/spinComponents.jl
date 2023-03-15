@@ -32,7 +32,7 @@ sy(θ, ϕ) = sin(θ)*sin(ϕ)
 sz(θ) = cos(θ)
 
 ### Spin Couplings ###
-scvect(θ, ϕ, ang::CouplAng1D) = [sx(θ, ϕ)*sin(ang.θ1)*cos(ang.ϕ1) + sy(θ, ϕ)*sin(ang.θ1)*sin(ang.ϕ1) + sz(θ)*cos(ang.θ1),
+scvect(θ, ϕ, ang::CouplAng1D) = [sqrt(3)*(sx(θ, ϕ)*sin(ang.θ1)*cos(ang.ϕ1) + sy(θ, ϕ)*sin(ang.θ1)*sin(ang.ϕ1) + sz(θ)*cos(ang.θ1)),
                                  0,
                                  0]
 scvect(θ, ϕ, ang::CouplAng2D) = [sx(θ, ϕ)*sin(ang.θ1)*cos(ang.ϕ1) + sy(θ, ϕ)*sin(ang.θ1)*sin(ang.ϕ1) + sz(θ)*cos(ang.θ1),
