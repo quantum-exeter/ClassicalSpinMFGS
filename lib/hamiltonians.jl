@@ -32,7 +32,7 @@ struct LorPrm3D{T<:Real} <: Lorentzian
     α3::T
 end
 
-### Reorganisation Energies ###
+### Reorganisation energies ###
 Q(prm::LorPrm1D) = Diagonal([(prm.α1)/(2*prm.ω01^2),
                              0,
                              0])
@@ -43,7 +43,7 @@ Q(prm::LorPrm3D) = Diagonal([(prm.α1)/(2*prm.ω01^2),
                              (prm.α2)/(2*prm.ω02^2),
                              (prm.α3)/(2*prm.ω03^2)])
 
- ### System Hamiltonian ###
+### System Hamiltonian ###
 HS(θ) = -sign(γ)*sz(θ)
 
 ### Effective Hamiltonian ###
