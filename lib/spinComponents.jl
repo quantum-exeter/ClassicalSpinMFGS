@@ -26,12 +26,12 @@ struct CouplAng3D{T<:Real} <: CouplingAngles
     ϕ3::T
 end
 
-### Spin Components ###
+### Spin components ###
 sx(θ, ϕ) = sin(θ)*cos(ϕ)
 sy(θ, ϕ) = sin(θ)*sin(ϕ)
 sz(θ) = cos(θ)
 
-### Spin Couplings ###
+### Spin couplings ###
 scvect(θ, ϕ, ang::CouplAng1D) = [sqrt(3)*(sx(θ, ϕ)*sin(ang.θ1)*cos(ang.ϕ1) + sy(θ, ϕ)*sin(ang.θ1)*sin(ang.ϕ1) + sz(θ)*cos(ang.θ1)),
                                  0,
                                  0]
