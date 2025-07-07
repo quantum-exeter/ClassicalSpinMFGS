@@ -44,9 +44,9 @@ syGS_list = zeros(length(T))
 szGS_list = zeros(length(T))
 
 @showprogress for i in eachindex(T)
-    sxGS_list[i] = magGx(big(T[i]))
-    syGS_list[i] = magGy(big(T[i]))
-    szGS_list[i] = magGz(big(T[i]))
+    sxGS_list[i] = sxGibbs(big(T[i]))
+    syGS_list[i] = syGibbs(big(T[i]))
+    szGS_list[i] = szGibbs(big(T[i]))
 end
 
 ### MF state spin values ###
@@ -57,9 +57,9 @@ syMFGS_list = zeros(length(T))
 szMFGS_list = zeros(length(T))
 
 @showprogress for i in eachindex(T)
-    sxMFGS_list[i] = magx(big(T[i]), ang, prm)
-    syMFGS_list[i] = magy(big(T[i]), ang, prm)
-    szMFGS_list[i] = magz(big(T[i]), ang, prm)
+    sxMFGS_list[i] = sx(big(T[i]), ang, prm)
+    syMFGS_list[i] = sy(big(T[i]), ang, prm)
+    szMFGS_list[i] = sz(big(T[i]), ang, prm)
 end
 
 ### Store values ###
